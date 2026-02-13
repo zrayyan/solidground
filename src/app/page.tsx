@@ -1,65 +1,79 @@
-import Image from "next/image";
+import { Metadata } from 'next';
+import Hero from '@/components/sections/Hero';
+import TrustBar from '@/components/sections/TrustBar';
+import ServicesShowcase from '@/components/sections/ServicesShowcase';
+import ServiceAreaMap from '@/components/sections/ServiceAreaMap';
+import ProjectGallery from '@/components/sections/ProjectGallery';
+import ProcessTimeline from '@/components/sections/ProcessTimeline';
+
+export const metadata: Metadata = {
+  title: 'SolidGround Concrete Solutions | Expert Concrete Services',
+  description: 'Professional concrete contractor serving Central Florida. Driveways, patios, foundations, and decorative concrete in Orlando, Tampa, Daytona Beach, and surrounding areas. Free estimates, 20+ years experience, licensed & insured.',
+  keywords: 'concrete contractor, driveway installation, patio construction, foundation repair, decorative concrete, concrete repair',
+  openGraph: {
+    title: 'SolidGround Concrete Solutions | Expert Concrete Services',
+    description: 'Professional concrete contractor with 20+ years experience. Free estimates for driveways, patios, foundations, and decorative concrete throughout Central Florida.',
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'SolidGround Concrete Solutions',
+    description: 'Expert concrete services with 20+ years experience. Free estimates available.',
+  },
+};
 
 export default function Home() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "SolidGround Concrete Solutions",
+    "description": "Professional concrete contractor specializing in driveways, patios, foundations, and decorative concrete",
+    "url": "https://solidground.com",
+    "telephone": "(555) 123-CONCRETE",
+    "email": "info@solidground.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Central Florida",
+      "addressRegion": "FL",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "40.7128",
+      "longitude": "-74.0060"
+    },
+    "openingHours": [
+      "Mo-Fr 07:00-18:00",
+      "Sa 08:00-16:00"
+    ],
+    "serviceType": [
+      "Concrete Contractor",
+      "Driveway Installation",
+      "Patio Construction",
+      "Foundation Repair",
+      "Decorative Concrete"
+    ],
+    "priceRange": "$$",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "150"
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <Hero />
+      <TrustBar />
+      <ServicesShowcase />
+      <ServiceAreaMap />
+      <ProjectGallery />
+      <ProcessTimeline />
+    </main>
   );
 }
