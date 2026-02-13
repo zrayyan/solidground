@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Hammer, Stamp, Truck, Wrench, Paintbrush, Shield, ArrowRight } from 'lucide-react';
@@ -9,6 +10,7 @@ const services = [
   {
     icon: Hammer,
     title: 'Driveways & Walkways',
+    slug: 'driveways-walkways',
     description: 'Custom concrete driveways and walkways with various finishes and patterns.',
     features: ['Stamped concrete', 'Colored concrete', 'Stamped overlays', 'Custom designs'],
     startingPrice: '$12/sq ft'
@@ -16,6 +18,7 @@ const services = [
   {
     icon: Stamp,
     title: 'Stamped Decorative Concrete',
+    slug: 'stamped-concrete',
     description: 'Transform ordinary concrete into beautiful stone, brick, or tile patterns.',
     features: ['Brick patterns', 'Stone textures', 'Tile designs', 'Custom stamps'],
     startingPrice: '$15/sq ft'
@@ -81,9 +84,17 @@ export default function ServicesGrid() {
                   </ul>
                   <div className="flex justify-between items-center">
                     <span className="text-safety-orange font-semibold">{service.startingPrice}</span>
-                    <Button variant="outline" size="sm">
-                      Learn More
-                    </Button>
+                    {service.slug ? (
+                      <Link href={`/services/${service.slug}`}>
+                        <Button variant="outline" size="sm">
+                          Learn More
+                        </Button>
+                      </Link>
+                    ) : (
+                      <Button variant="outline" size="sm">
+                        Learn More
+                      </Button>
+                    )}
                   </div>
                 </CardContent>
               </Card>
