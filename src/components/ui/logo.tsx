@@ -8,15 +8,17 @@ interface LogoProps {
   size?: 'sm' | 'md' | 'lg';
   animated?: boolean;
   href?: string;
+  variant?: 'light' | 'dark';
 }
 
 interface LogoContentProps {
   className?: string;
   size: 'sm' | 'md' | 'lg';
   animated: boolean;
+  variant: 'light' | 'dark';
 }
 
-function LogoContent({ className = '', size, animated }: LogoContentProps) {
+function LogoContent({ className = '', size, animated, variant }: LogoContentProps) {
   const sizeClasses = {
     sm: 'w-8 h-8',
     md: 'w-12 h-12',
@@ -135,14 +137,14 @@ function LogoContent({ className = '', size, animated }: LogoContentProps) {
         transition={{ delay: 0.3, duration: 0.6 }}
       >
         <motion.span
-          className={`font-heading font-bold text-off-white ${textSizeClasses[size]}`}
+          className={`font-heading font-bold ${variant === 'light' ? 'text-charcoal' : 'text-off-white'} ${textSizeClasses[size]}`}
           whileHover={{ scale: 1.02 }}
         >
           Solid
         </motion.span>
         <motion.span
           className={`font-heading font-bold text-safety-orange ${textSizeClasses[size]}`}
-          initial={{ color: '#F4F4F4' }}
+          initial={{ color: variant === 'light' ? '#1A202C' : '#F4F4F4' }}
           animate={{ color: '#FF6B35' }}
           transition={{ delay: 0.8, duration: 0.4 }}
           whileHover={{ scale: 1.02 }}
@@ -158,15 +160,16 @@ export default function Logo({
   className = '',
   size = 'md',
   animated = true,
-  href = '/'
+  href = '/',
+  variant = 'dark'
 }: LogoProps) {
   if (href) {
     return (
       <Link href={href} className="flex items-center">
-        <LogoContent className={className} size={size} animated={animated} />
+        <LogoContent className={className} size={size} animated={animated} variant={variant} />
       </Link>
     );
   }
 
-  return <LogoContent className={className} size={size} animated={animated} />;
+  return <LogoContent className={className} size={size} animated={animated} variant={variant} />;
 }
